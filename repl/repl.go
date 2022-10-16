@@ -8,12 +8,12 @@ import (
 	"lang/token"
 )
 
-const Prompt string = ">> "
+const PROMPT string = ">> "
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 	for {
-		fmt.Printf(Prompt)
+		fmt.Print(PROMPT)
 		scanned := scanner.Scan()
 		if !scanned {
 			return
