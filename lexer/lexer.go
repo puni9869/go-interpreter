@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"lang/token"
+	"play/token"
 )
 
 type Lexer struct {
@@ -38,16 +38,17 @@ func (l *Lexer) NextToken() token.Token {
 	case '=':
 		if l.peekChar() == '=' {
 			ch := l.ch
-			l.readChar()
 			tok = token.Token{Type: token.EQ, Literal: string(ch) + string(l.ch)}
 		} else {
 			tok = newToken(token.ASSIGN, l.ch)
 		}
-
+		l.readChar()
 	case '+':
 		tok = newToken(token.PLUS, l.ch)
+		l.readChar()
 	case '-':
 		tok = newToken(token.MINUS, l.ch)
+		l.readChar()
 	case '!':
 		if l.peekChar() == '=' {
 			ch := l.ch
@@ -58,27 +59,38 @@ func (l *Lexer) NextToken() token.Token {
 		}
 	case '/':
 		tok = newToken(token.SLASH, l.ch)
+		l.readChar()
 	case '*':
 		tok = newToken(token.ASTERISK, l.ch)
+		l.readChar()
 	case '<':
 		tok = newToken(token.LT, l.ch)
+		l.readChar()
 	case '>':
 		tok = newToken(token.GT, l.ch)
+		l.readChar()
 	case ';':
 		tok = newToken(token.SEMICOLON, l.ch)
+		l.readChar()
 	case ',':
 		tok = newToken(token.COMMA, l.ch)
+		l.readChar()
 	case '{':
 		tok = newToken(token.LBRACE, l.ch)
+		l.readChar()
 	case '}':
 		tok = newToken(token.RBRACE, l.ch)
+		l.readChar()
 	case '(':
 		tok = newToken(token.LPAREN, l.ch)
+		l.readChar()
 	case ')':
 		tok = newToken(token.RPAREN, l.ch)
+		l.readChar()
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
+		l.readChar()
 	default:
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
@@ -87,11 +99,12 @@ func (l *Lexer) NextToken() token.Token {
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT
 			tok.Literal = l.readNumber()
+			return tok
 		} else {
 			tok = newToken(token.ILLEGLE, l.ch)
 		}
 	}
-	l.readChar()
+
 	return tok
 }
 

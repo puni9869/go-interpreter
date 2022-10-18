@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"lang/token"
+	"play/token"
 	"testing"
 )
 
@@ -44,15 +44,8 @@ func TestNextToken2(t *testing.T) {
 	   let add = fn(x, y) {
 		 x + y;
 	};
-	   let result = add(five, ten);
-	   !-/*5;
-	   5 < 10 > 5;
-	   if (5 < 10) {
-		   return true;
-	   } else {
-		   return false;
-	}
-	10 == 10; 10 != 9; `
+   let result = add(five, ten);
+   `
 
 	tests := []struct {
 		expectedType    token.TokenType
@@ -109,5 +102,4 @@ func TestNextToken2(t *testing.T) {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q", i, tt.expectedLiteral, tok.Literal)
 		}
 	}
-
 }
