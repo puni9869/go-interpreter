@@ -1,9 +1,9 @@
 package evaluator
 
 import (
-	"monkey/lexer"
-	"monkey/object"
-	"monkey/parser"
+	"play/lexer"
+	"play/object"
+	"play/parser"
 	"testing"
 )
 
@@ -214,7 +214,7 @@ if (10 > 1) {
 			"identifier not found: foobar",
 		},
 		{
-			`{"name": "Monkey"}[fn(x) { x }];`,
+			`{"name": "play"}[fn(x) { x }];`,
 			"unusable as hash key: FUNCTION",
 		},
 		{
