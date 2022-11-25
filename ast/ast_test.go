@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"play/token"
+	"monkey/token"
 	"testing"
 )
 
